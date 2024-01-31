@@ -1,0 +1,178 @@
+/* CSS styles */
+
+:root {
+    --text: #ecf1f1;
+    --background: #0b1616;
+    --primary: #91ddd8;
+    /*--secondary: #91ddd8;
+    --primary: #1a968e;*/
+    --secondary: #1a968e;
+    --accent: #1b3535;
+}
+
+h1 {
+    font-family: Impact, sans-serif;
+    color: #CE5937;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+}
+
+.grid-container-up {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: auto;
+    width: 100%;
+    height: 60%;
+}
+
+.grid-container-down {
+    display: grid;
+    grid-template-columns: 35% auto 35%;
+    grid-template-rows: auto;
+    width: 100%;
+    height: 40%;
+}
+
+.grid-item {
+    background-color: var(--primary);
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    padding: 25px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.content-box {
+    background-color: var(--background);
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px var(--accent);
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.list {
+    list-style: none;
+}
+
+.list-header {
+    color: var(--text);
+    font-size: 4vh;
+    font-weight: 600;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.list-element {
+    display: grid;
+    grid-template-columns: 75% 10% 15%;
+    background-color: var(--secondary);
+    padding: 5px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+}
+
+.list-element-name {
+    color: var(--background);
+    font-size: 2.3vh;
+    font-weight: 600;
+}
+
+img {
+    height: 2.3vh;
+}
+
+.content-box-timer {
+    background-color: var(--background);
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px var(--accent);
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-text {
+    color: var(--text);
+    font-size: 1.6vw;
+    font-weight: 800;
+}
+
+.timer-clock {
+    background-color: var(--secondary);
+    width: 80%;
+    height: 2.5em;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    color: var(--background);
+    font-size: 4vh;
+    font-weight: 600;
+    border-radius: 30px;
+    letter-spacing: 0.05em;
+    position: relative;
+    left: 10%;
+}
+
+.timer-reset {
+    background-color: #c92f00;
+    color: #ffffff;
+    font-size: 3vh;
+    font-weight: 400;
+    border: 0px;
+    border-radius: 20px;
+    width: 60%;
+    height: 1.3em;
+    position: relative;
+    left: 20%;
+}
+
+.list-element-rvv {
+    display: grid;
+    grid-template-columns: 17.5% 17.5% 65%;
+    background-color: var(--secondary);
+    padding: 5px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+}
+
+.rvv-time {
+    color: var(--background);
+    font-size: 2.5vh;
+    font-weight: 600;
+}
+
+.rvv-time-plus {
+    color: #c92f00;
+    font-size: 2.5vh;
+    font-weight: 600;
+}
+
+.clock {
+    position: relative;
+    width: 80%;
+    height: 30%;
+    top: 35%;
+    left: 10%;
+    color: var(--secondary);
+    text-align: center;
+    font-size: 3.5vw;
+    font-weight: 600;
+    letter-spacing: 7px;
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>emgenics office board</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="grid-container-up">
+            <div class="grid-item">
+                <div class="content-box">
+                    <p>hello world</p>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="content-box">
+                    <ul id="main" class="list"></ul>
+                    <ul id="side" class="list"></ul>
+                    <script>
+                        async function load(url, id) {
+                            const response = await fetch(url);
+                            const menu = await response.json()
+                            let list = document.getElementById(id);
+                            for (i = 0; i < menu.length; i++) {
+                                let listElement = document.createElement("div");
+                                listElement.className = "list-element";
+
+                                let name = document.createElement("div");
+                                name.className = "list-element-name"
+                                name.innerText = menu[i].name;
+
+                                let icon = document.createElement("img")
+                                if (menu[i].id.includes("V") && !menu[i].id.includes("VG") && !menu[i].id.includes("MV")) {
+                                    icon.src = "vegie.png";
+                                }
+                                if (menu[i].id.includes("VG")) {
+                                    icon.src = "vegan.png";
+                                }
+
+                                let price = document.createElement("div")
+                                price.className = "list-element-name"
+                                price.innerText = menu[i].student + " EUR"
+
+                                list.appendChild(listElement);
+                                listElement.appendChild(name)
+                                listElement.appendChild(icon)
+                                listElement.appendChild(price)
+                            }
+                        }
+
+                        let mainList = document.getElementById("main");
+                        let li = document.createElement("li");
+                        li.innerText = "Hauptgerichte";
+                        li.className = "list-header";
+                        mainList.appendChild(li);
+                        load("http://localhost:8123/mensa/today/main", "main");
+
+                        let sideList = document.getElementById("side");
+                        li = document.createElement("li");
+                        li.innerText = "Beilagen";
+                        li.className = "list-header";
+                        sideList.appendChild(li);
+                        load("http://localhost:8123/mensa/today/side", "side");
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="grid-container-down">
+            <div class="grid-item">
+                <div class="content-box-timer">
+                    <div class="timer-text">Seconds since last git accident</div>
+                    <div class="timer-clock" id="seconds"></div>
+                    <button onclick="resetTimer()" class="timer-reset">reset timer</button>
+                    <script>
+                        let secondsElement = document.getElementById('seconds');
+                        let seconds = 0;
+                        let timerInterval;
+
+                        function startTimer() {
+                            timerInterval = setInterval(() => {
+                                seconds++;
+                                secondsElement.textContent = seconds;
+                            }, 1000);
+                        }
+
+                        function resetTimer() {
+                            clearInterval(timerInterval);
+                            seconds = 0;
+                            secondsElement.textContent = seconds;
+                            startTimer();
+                        }
+
+                        // Start the timer when the script runs
+                        startTimer();
+                    </script>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="content-box">
+                    <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+                    <script>
+                        function showTime() {
+                            var date = new Date();
+                            var h = date.getHours(); // 0 - 23
+                            var m = date.getMinutes(); // 0 - 59
+                            var s = date.getSeconds(); // 0 - 59
+
+                            h = (h < 10) ? "0" + h : h;
+                            m = (m < 10) ? "0" + m : m;
+                            s = (s < 10) ? "0" + s : s;
+
+                            var time = h + ":" + m + ":" + s + " ";
+                            document.getElementById("MyClockDisplay").innerText = time;
+                            document.getElementById("MyClockDisplay").textContent = time;
+
+                            setTimeout(showTime, 1000);
+
+                        }
+
+                        showTime();
+                    </script>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="content-box">
+                    <ul id="techcampus" class="list"></ul>
+                    <script>
+                        async function loadRvv(url, id) {
+                            const response = await fetch(url);
+                            const departures = await response.json()
+                            let list = document.getElementById(id);
+
+                            list.innerHTML = ''; // Clear previous content before updating
+
+                            let stopH = document.createElement("div");
+                            stopH.innerText = "TechCampus/OTH";
+                            stopH.className = "list-header";
+                            list.appendChild(stopH);
+
+                            for (i = 0; i < departures.length; i++) {
+                                let directionElement = document.createElement("div");
+                                directionElement.className = "list-element-rvv"
+
+                                let time = document.createElement("div")
+                                time.className = "rvv-time"
+                                time.innerText = departures[i].time
+
+                                let timePlus = document.createElement("div")
+                                timePlus.className = "rvv-time-plus"
+
+                                if (departures[i].timePlus != "0" && departures[i].timePlus != "") {
+                                    timePlus.innerText = "+" + departures[i].timePlus
+                                }
+
+                                let name = document.createElement("div");
+                                name.className = "list-element-name";
+                                name.innerText = departures[i].number + " " + departures[i].direction;
+
+                                list.appendChild(directionElement);
+                                directionElement.appendChild(time);
+                                directionElement.appendChild(timePlus);
+                                directionElement.appendChild(name);
+                            }
+                        }
+
+                        function updateContent() {
+                            loadRvv("http://localhost:8124/rvv/techcampus", "techcampus");
+                        }
+
+                        // Initial content load
+                        updateContent();
+
+                        // Update content every 1 minutes (60000 milliseconds)
+                        setInterval(updateContent, 60000);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
