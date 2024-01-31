@@ -11,7 +11,75 @@
         <div class="grid-container-up">
             <div class="grid-item">
                 <div class="content-box">
-                    <p>hello world</p>
+                    <ul id="score-board" class="list"></ul>
+                    <script>
+                        // When the user clicks on div, open the popup
+                        function myFunction(popupID) {
+                            var popup = document.getElementById(popupID);
+                            if (popup.checkVisibility) {
+                                popup.classList.toggle("show");
+                            }
+                            else {
+                                popup.classList.toggle("hide");
+                            }
+                        }
+
+                        function updateScore(score, index) {
+                            var scoreCounter = document.getElementById("scoreCounter" + scoreBoard[index].id)
+                            switch (score) {
+                                case 1:
+                                    // +1
+                                    scoreBoard[index].onePoint++;
+
+                                    break;
+                                case 2:
+                                    // +0.5
+                                    scoreBoard[index].halfPoint++;
+                                    break;
+                            }
+                            scoreBoard[index].total++;
+                            scoreCounter.innerText = scoreBoard[index].onePoint + "/" + scoreBoard[index].halfPoint + "/" +scoreBoard[index].total;
+                        }
+
+                        function Score(id, name, onePoint, halfPoint, total) {
+                            this.id = id;
+                            this.name = name;
+                            this.onePoint = onePoint;
+                            this.halfPoint = halfPoint;
+                            this.total = total;
+                        }
+
+                        var scoreBoard = [
+                            new Score("1", "Peter", 2, 1, 3),
+                            new Score("2", "Golo", 2, 1, 11),
+                            new Score("3", "Michi G", 2, 1, 9),
+                            new Score("4", "Silvio", 0, 0, 5),
+                            new Score("5", "Christoph", 1, 2, 17),
+                        ]
+
+                        function initScoreBoard() {
+                            var list = document.getElementById("score-board");
+                            for (i = 0; i < scoreBoard.length; i++) {
+                                let element = document.createElement("div")
+                                element.className = "score-board-element"
+                                element.innerHTML = `
+                                    <div class="score-board-name">${this.scoreBoard[i].name}</div>
+                                    <div class="score-board-score" onclick="myFunction('popup${this.scoreBoard[i].id}')">
+                                        <p id="scoreCounter${this.scoreBoard[i].id}">${this.scoreBoard[i].onePoint}/${this.scoreBoard[i].halfPoint}/${this.scoreBoard[i].total}</p>
+                                        <span class="score-board-popup" id="popup${this.scoreBoard[i].id}">
+                                            <button class="score-board-button" onclick="updateScore(1, ${i})">+1 Punkt</button>
+                                            <button class="score-board-button" onclick="updateScore(2, ${i})">+0.5 Punkte</button>
+                                            <button class="score-board-button" onclick="updateScore(0, ${i})">i suck</button>
+                                        </span>
+                                `;
+
+                                list.appendChild(element)
+                            }
+                        }
+
+                        initScoreBoard();
+
+                    </script>
                 </div>
             </div>
             <div class="grid-item">
