@@ -113,16 +113,16 @@
                                 name.innerText = menu[i].name;
 
                                 let icon = document.createElement("img")
-                                if (menu[i].id.includes("V") && !menu[i].id.includes("VG") && !menu[i].id.includes("MV")) {
+                                if (menu[i].notes.includes("vegetarisch")) {
                                     icon.src = "vegie.png";
                                 }
-                                if (menu[i].id.includes("VG")) {
+                                if (menu[i].notes.includes("vegan")) {
                                     icon.src = "vegan.png";
                                 }
 
                                 let price = document.createElement("div")
                                 price.className = "list-element-name"
-                                price.innerText = menu[i].student + " EUR"
+                                price.innerText = menu[i].prices.students.toFixed(2) + " EUR"
 
                                 list.appendChild(listElement);
                                 listElement.appendChild(name)
