@@ -94,6 +94,91 @@ img {
     height: 2.3vh;
 }
 
+.score-board-element {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    font-size: 3.5vh;
+    font-weight: 600;
+}
+
+.score-board-name {
+    background-color: var(--secondary);
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    color: var(--background);
+    text-align: center;
+}
+
+.score-board-score {
+    background-color: var(--secondary);
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    color: var(--background);
+    text-align: center;
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.score-board-score .score-board-popup {
+    visibility: hidden;
+    width: 100%;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 0%;
+}
+
+.score-board-score .score-board-popup::after {
+    content: "";
+    position: absolute;
+    rotate: 180deg;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.score-board-score .show {
+    visibility: visible;
+}
+
+.score-board-score .hide {
+    visibility: hidden;
+}
+
+.score-board-button {
+    background-color: var(--secondary);
+    border: 0px;
+    padding: 5px;
+    width: 100%;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border-radius: 20px;
+    color: var(--background);
+    text-align: center;
+    font-size: 2.5vh;
+    font-weight: 600;
+}
+
+
+
 .content-box-timer {
     background-color: var(--background);
     /*border: 1px solid rgba(0, 0, 0, 0.8);*/
