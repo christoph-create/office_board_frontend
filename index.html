@@ -3,6 +3,7 @@
 
 <head>
     <title>emgenics office board</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="main.css">
 </head>
 
@@ -97,9 +98,16 @@
             </div>
             <div class="grid-item">
                 <div class="content-box">
+                    <div class="switch-dish-list">
+                        <button onclick="switchLeft()" class="switch-dish">◄</button>
+                        <button onclick="switchToday()" class="switch-dish">&#8962;</button>
+                        <button onclick="switchRight()" class="switch-dish">►</button>
+                    </div>
                     <ul id="main" class="list"></ul>
                     <ul id="side" class="list"></ul>
                     <script>
+                        let currentDate = new Date()
+
                         async function load(url, id) {
                             const response = await fetch(url);
                             const menu = await response.json()
@@ -131,6 +139,28 @@
                             }
                         }
 
+                        function switchLeft() {
+                            currentDate.setDate(currentDate.getDate() - 1); // Decrement the date by one day
+                            updateDishes();
+                        }
+
+                        function switchToday() {
+                            currentDate = new Date()
+                            updateDishes();
+                        }
+
+                        function switchRight() {
+                            currentDate.setDate(currentDate.getDate() + 1); // Increment the date by one day
+                            updateDishes();
+                        }
+
+                        function formatDate(date) {
+                            const year = date.getFullYear();
+                            const month = String(date.getMonth() + 1).padStart(2, "0");
+                            const day = String(date.getDate()).padStart(2, "0");
+                            return `${year}-${month}-${day}`;
+                        }
+
                         function initializeDishes() {
                             let mainList = document.getElementById("main");
                             mainList.replaceChildren()
@@ -147,21 +177,15 @@
                             sideList.appendChild(li);
                         }
 
-                        function updateDishesAtMidnight() {
+                        function updateDishes() {
                             initializeDishes()
-                            load("http://localhost:8123/mensa/today/main", "main")
-                            load("http://localhost:8123/mensa/today/side", "side")
-
-                            var now = new Date()
-                            var tomorrow = new Date(now)
-                            tomorrow.setDate(now.getDate() + 1)
-                            tomorrow.setHours(0, 0, 0, 0)
-                            var timeUntilMidnight = tomorrow - now
-
-                            setTimeout(updateDishesAtMidnight, timeUntilMidnight)
+                            const mainUrl = `http://localhost:8123/mensa/main?date=${formatDate(currentDate)}`;
+                            const sideUrl = `http://localhost:8123/mensa/side?date=${formatDate(currentDate)}`;
+                            load(mainUrl, "main")
+                            load(sideUrl, "side")
                         }
 
-                        updateDishesAtMidnight()
+                        updateDishes()
                     </script>
                 </div>
             </div>
@@ -295,6 +319,22 @@
             </div>
         </div>
     </div>
+    <script>
+        function reloadPageAtMidnight() {
+            var now = new Date();
+            var tomorrow = new Date(now);
+            tomorrow.setDate(now.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            var timeUntilMidnight = tomorrow - now;
+
+            setTimeout(function () {
+                window.location.reload();
+            }, timeUntilMidnight);
+        }
+
+        // Call the function to reload the page at midnight
+        reloadPageAtMidnight();
+    </script>
 </body>
 
 </html>

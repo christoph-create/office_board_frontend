@@ -90,6 +90,26 @@ h1 {
     font-weight: 600;
 }
 
+.switch-dish-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch-dish {
+    background-color: var(--secondary);
+    border: 0px;
+    padding: 5px;
+    width: 10%;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border-radius: 20px;
+    color: var(--background);
+    text-align: center;
+    font-size: 2.5vh;
+    font-weight: 600;
+}
+
 img {
     height: 2.3vh;
 }
