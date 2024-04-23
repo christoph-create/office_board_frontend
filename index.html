@@ -131,19 +131,37 @@
                             }
                         }
 
-                        let mainList = document.getElementById("main");
-                        let li = document.createElement("li");
-                        li.innerText = "Hauptgerichte";
-                        li.className = "list-header";
-                        mainList.appendChild(li);
-                        load("http://localhost:8123/mensa/today/main", "main");
+                        function initializeDishes() {
+                            let mainList = document.getElementById("main");
+                            mainList.replaceChildren()
+                            let li = document.createElement("li");
+                            li.innerText = "Hauptgerichte";
+                            li.className = "list-header";
+                            mainList.appendChild(li);
 
-                        let sideList = document.getElementById("side");
-                        li = document.createElement("li");
-                        li.innerText = "Beilagen";
-                        li.className = "list-header";
-                        sideList.appendChild(li);
-                        load("http://localhost:8123/mensa/today/side", "side");
+                            let sideList = document.getElementById("side");
+                            sideList.replaceChildren()
+                            li = document.createElement("li");
+                            li.innerText = "Beilagen";
+                            li.className = "list-header";
+                            sideList.appendChild(li);
+                        }
+
+                        function updateDishesAtMidnight() {
+                            initializeDishes()
+                            load("http://localhost:8123/mensa/today/main", "main")
+                            load("http://localhost:8123/mensa/today/side", "side")
+
+                            var now = new Date()
+                            var tomorrow = new Date(now)
+                            tomorrow.setDate(now.getDate() + 1)
+                            tomorrow.setHours(0, 0, 0, 0)
+                            var timeUntilMidnight = tomorrow - now
+
+                            setTimeout(updateDishesAtMidnight, timeUntilMidnight)
+                        }
+
+                        updateDishesAtMidnight()
                     </script>
                 </div>
             </div>
