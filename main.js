@@ -39,7 +39,7 @@ function Score(id, name, onePoint, halfPoint, total) {
 
 var scoreBoard = [
     //    new Score("1", "Peter", 2, 1, 3),
-    //   new Score("2", "Golo", 2, 1, 11),
+    //    new Score("2", "Golo", 2, 1, 11),
     //    new Score("3", "Michi G", 2, 1, 9),
     //    new Score("4", "Silvio", 0, 0, 5),
     //    new Score("5", "Christoph", 1, 2, 17),
@@ -157,6 +157,10 @@ function updateDishes() {
     const sideUrl = `http://${serverIP}:8123/mensa/side?date=${formatDate(currentDate)}`;
     load(mainUrl, "main")
     load(sideUrl, "side")
+
+    // Update the date display
+    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('date').innerText = currentDate.toLocaleDateString(undefined, options);
 }
 
 updateDishes()

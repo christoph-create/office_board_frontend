@@ -92,8 +92,8 @@ h1 {
 
 .switch-dish-list {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: end;
 }
 
 .switch-dish {
@@ -101,13 +101,19 @@ h1 {
     border: 0px;
     padding: 5px;
     width: 10%;
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
+    margin: 2.5px;
     border-radius: 20px;
     color: var(--background);
-    text-align: center;
     font-size: 2.5vh;
     font-weight: 600;
+}
+
+.date {
+    float: left;
+    padding-right: 10px;
+    color: white;
+    font-size: 2.4vh;
+    font-weight: 300;
 }
 
 img {
