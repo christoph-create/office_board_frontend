@@ -33,7 +33,17 @@
                 <div class="content-box-timer">
                     <div class="timer-text">Seconds since last git accident</div>
                     <div class="timer-clock" id="seconds"></div>
-                    <button onclick="resetTimer()" class="timer-reset">reset timer</button>
+                    <button onclick="openModal()" class="timer-reset">reset timer</button>
+                </div>
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <p>Prove yourself not beeing a fly:</p>
+                        <div id="arrow-container">
+                            <button id="arrow1" class="arrow" onclick="rotateArrow('arrow1')">↑</button>
+                            <button id="arrow2" class="arrow" onclick="rotateArrow('arrow2')">↑</button>
+                        </div>
+                        <button class="modal-confirm" onclick="confirmReset()">Confirm Reset</button>
+                    </div>
                 </div>
             </div>
             <div class="grid-item">
@@ -50,4 +60,5 @@
     </div>
     <script src="main.js"></script>
 </body>
+
 </html>

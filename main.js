@@ -1,4 +1,4 @@
-var serverIP = "localhost"
+var serverIP = "10.10.40.150"
 
 // score board
 function myFunction(popupID) {
@@ -169,6 +169,71 @@ updateDishes()
 let secondsElement = document.getElementById('seconds');
 let seconds = 0;
 let timerInterval;
+let modal = document.getElementById('modal');
+let arrowDirections = {
+    arrow1: 0,
+    arrow2: 0,
+};
+
+function rotateArrow(arrowId) {
+    arrowDirections[arrowId] = (arrowDirections[arrowId] + 90) % 360;
+    const arrow = document.getElementById(arrowId);
+
+    switch (arrowDirections[arrowId]) {
+        case 0:
+            arrow.textContent = '↑';
+            break;
+        case 90:
+            arrow.textContent = '→';
+            break;
+        case 180:
+            arrow.textContent = '↓';
+            break;
+        case 270:
+            arrow.textContent = '←';
+            break;
+    }
+}
+
+function setRandomArrowPositions() {
+    arrowDirections.arrow1 = getRandomRotation();
+
+    do {
+        arrowDirections.arrow2 = getRandomRotation();
+    } while (arrowDirections.arrow1 === arrowDirections.arrow2);
+
+    rotateArrow('arrow1');
+    rotateArrow('arrow2');
+}
+
+function getRandomRotation() {
+    const rotations = [0, 90, 180, 270];
+    return rotations[Math.floor(Math.random() * rotations.length)];
+}
+
+function openModal() {
+    modal.style.display = 'block';
+    setRandomArrowPositions();
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+function confirmReset() {
+    if (arrowDirections.arrow1 === arrowDirections.arrow2) {
+        resetTimer();
+        closeModal();
+    } else {
+        alert('The arrows are not aligned! Please try again.');
+    }
+}
+
+window.onclick = function (event) {
+    if (event.target === modal) {
+        closeModal();
+    }
+}
 
 function startTimer() {
     timerInterval = setInterval(() => {
