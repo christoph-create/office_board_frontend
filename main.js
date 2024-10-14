@@ -225,7 +225,7 @@ function confirmReset() {
         resetTimer();
         closeModal();
     } else {
-        alert('The arrows are not aligned! Please try again.');
+        alert('Fumbling, foolish fly, go fuck off!');
     }
 }
 
